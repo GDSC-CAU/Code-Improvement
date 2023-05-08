@@ -25,3 +25,6 @@ Commit Message Format: None. Anything is fine.
     ├── ${weekOrder} 
     │   ├── ${myName}.${fileExtension}
     └── README.md 
+
+# Challenges
+Each challenge is specified in the file "challenge.md" under each week directory.
