@@ -23,5 +23,5 @@ Commit Format: None. Anything is fine.
 ## Folder Structure
     .
     ├── ${myName} 
-    │   ├── ${fileName}.{fileExtension}
+    │   ├── ${fileName}.${fileExtension}
     └── README.md 
