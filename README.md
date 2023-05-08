@@ -16,12 +16,12 @@ Any kind of function || class is fine, but please keep following rules.
 
 ## Conventions
 ### PR
-PR Format: #${functionName || className}.${sourceCodeFileExtension}: ${class || returnType}
+PR Format: #${functionName || className}.${sourceCodeFileExtension}
 ### Commit
-Commit Format: None. Anything is fine.
+Commit Message Format: None. Anything is fine.
 
 ## Folder Structure
     .
-    ├── ${myName} 
-    │   ├── ${fileName}.${fileExtension}
+    ├── ${weekOrder} 
+    │   ├── ${myName}.${fileExtension}
     └── README.md 
