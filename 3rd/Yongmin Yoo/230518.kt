@@ -15,22 +15,28 @@ internal interface Exchange{
 }
 
 class Account(val user: String){
-    var accountNum: String = ""
     var accountAmount: Number = 0
+    var accountNum: String = ""
+    var accountPassword: String
 
     @kotlin.Throws(AccountException::class)
-    fun initAccount(val accountNum: String){
+    fun initAccount(val accountNum: String, val accountPassword: String){
         if(!accountNum.equals("")){
             throw AccountException("Account is Already Initialized")
         }
 
         this.accountNum = accountNum
+        this.accountPassword = accountPassword
     }
 
     @kotlin.Throws(AccountException::class)
-    fun putMoney(val amount: Number){
+    fun putMoney(val amount: Number, val password: String){
         if(accountNum.equals("")){
             throw AccountException("Account is not Initialized")
+        }
+
+        if(!accountPassword.equals(password)){
+            throw AccountException("Account Password is Wrong")
         }
 
         accountAmount += amount
@@ -39,13 +45,17 @@ class Account(val user: String){
 
     @kotlin.Throws(AccountException::class)
     @kotlin.Throws(MoneyException::class)
-    fun withdrawMoney(val amount: Number){
+    fun withdrawMoney(val amount: Number, val password: String){
         if(accountNum.equals("")){
             throw AccountException("Account is not Initialized")
         }
 
         if(accountAmount < amount){
             throw MoneyException("Account Balance is Smaller than Amount")
+        }
+
+        if(!accountPassword.equals(password)){
+            throw AccountException("Account Password is Wrong")
         }
 
         accountAmount -= amount
@@ -82,7 +92,7 @@ class MoneyExchange(var exchangeRate: Int): Exchange{
         this.exchangeRate = rate
     }
 
-    fun putMoneyToAccount(val account: Account, val amount: Number, val isDollar: Boolean){
+    fun putMoneyToAccount(val account: Account, val password: String, val amount: Number, val isDollar: Boolean){
         if(amount < 0){
             throw ValueException("Money Value must not be Negative")
         }
@@ -91,10 +101,10 @@ class MoneyExchange(var exchangeRate: Int): Exchange{
             amount = getWon(amount)
         }
 
-        account.putMoney(amount)
+        account.putMoney(amount, password)
     }
 
-    fun withdrawMoneyFromAccount(val account: Account, var amount: Number, val isDollar: Boolean){
+    fun withdrawMoneyFromAccount(val account: Account, val password: String, var amount: Number, val isDollar: Boolean){
         if(amount < 0){
             throw ValueException("Money Value must not be Negative")
         }
@@ -103,6 +113,6 @@ class MoneyExchange(var exchangeRate: Int): Exchange{
             amount = getWon(amount)
         }
 
-        account.withdrawMoney(amount)
+        account.withdrawMoney(amount, password)
     }
 }
